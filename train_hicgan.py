@@ -139,7 +139,7 @@ graph_dir = sys.argv[3]
 cell_type = sys.argv[4]"""
 
 
-def train(train_dir, valid_dir, model_dir):
+def train(train_dir, valid_dir, model_dir, num_epochs=5):
     # load data
     train_dir = train_dir #os.path.join(root_dir, 'train')
     train_data = np.load(train_dir, allow_pickle=True)
@@ -160,7 +160,7 @@ def train(train_dir, valid_dir, model_dir):
     lr_init = 1e-4
     beta1 = 0.9
     n_epoch_init = 1
-    n_epoch = 500
+    n_epoch = num_epochs
     lr_decay = 0.1
     decay_every = int(n_epoch / 2)
     ni = int(np.sqrt(batch_size))
