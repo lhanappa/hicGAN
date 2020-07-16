@@ -273,8 +273,7 @@ def train(train_dir, valid_dir, model_dir, num_epochs=5):
                 net_g_test.outputs, {t_image: lr_mats_valid[batch_size*i:batch_size*(i+1)]})
         hr_mats_pre[batch_size*(i+1):] = sess.run(net_g_test.outputs,
                                                 {t_image: lr_mats_valid[batch_size*(i+1):]})
-        mse_val = np.median(
-            map(compare_mse, hr_mats_pre[:, :, :, 0], hr_mats_valid[:, :, :, 0]))
+        mse_val = np.median(np.array(list(map(compare_mse, hr_mats_pre[:, :, :, 0], hr_mats_valid[:, :, :, 0]))))
         if mse_val < best_mse_val:
             wait = 0
             best_mse_val = mse_val
