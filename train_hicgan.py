@@ -160,11 +160,12 @@ def train(train_dir, valid_dir, model_dir, num_epochs=5):
 
     fulllen = lr_mats_train.shape[0]
     residual =np.mod(fulllen, batch_size)
+    print(fulllen, " ", residual)
     lr_mats_train = lr_mats_train[0:-(residual),...]
     lr_mats_valid = lr_mats_valid[0:-(residual),...]
     hr_mats_train = hr_mats_train[0:-(residual),...]
     hr_mats_valid = hr_mats_valid[0:-(residual),...]
-
+    print(lr_mats_train.shape)
 
     lr_init = 1e-4
     beta1 = 0.9
@@ -267,7 +268,7 @@ def train(train_dir, valid_dir, model_dir, num_epochs=5):
             n_iter += 1
         # validation
         hr_mats_pre = np.zeros(hr_mats_valid.shape)
-        for i in range(hr_mats_pre.shape[0]/batch_size):
+        for i in range(int(hr_mats_pre.shape[0]/batch_size)):
             hr_mats_pre[batch_size*i:batch_size*(i+1)] = sess.run(
                 net_g_test.outputs, {t_image: lr_mats_valid[batch_size*i:batch_size*(i+1)]})
         hr_mats_pre[batch_size*(i+1):] = sess.run(net_g_test.outputs,
