@@ -157,6 +157,15 @@ def train(train_dir, valid_dir, model_dir, num_epochs=5):
     graph_dir = os.path.join(model_dir, 'graph')
     tl.files.exists_or_mkdir(graph_dir)
     batch_size = 128
+
+    fulllen = lr_mats_train.shape[0]
+    residual =np.mod(fulllen, batch_size)
+    lr_mats_train = lr_mats_train[0:-(residual),...]
+    lr_mats_valid = lr_mats_valid[0:-(residual),...]
+    hr_mats_train = hr_mats_train[0:-(residual),...]
+    hr_mats_valid = hr_mats_valid[0:-(residual),...]
+
+
     lr_init = 1e-4
     beta1 = 0.9
     n_epoch_init = 1
