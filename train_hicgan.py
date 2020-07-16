@@ -139,22 +139,22 @@ graph_dir = sys.argv[3]
 cell_type = sys.argv[4]"""
 
 
-def train(root_dir):
+def train(train_dir, valid_dir, model_dir):
     # load data
-    train_dir = os.path.join(root_dir, 'train')
+    train_dir = train_dir #os.path.join(root_dir, 'train')
     train_data = np.load(train_dir, allow_pickle=True)
     lr_mats_train = train_data['lr_data']
     hr_mats_train = train_data['hr_data']
 
-    valid_dir = os.path.join(root_dir, 'valid')
+    valid_dir = valid_dir #os.path.join(root_dir, 'valid')
     valid_data = np.load(valid_dir, allow_pickle=True)
     lr_mats_valid = valid_data['lr_data']
     hr_mats_valid = valid_data['hr_data']
 
     tl.global_flag['mode'] = 'hicgan'
-    checkpoint = os.path.join(root_dir, 'model', 'ckpt')
+    checkpoint = os.path.join(model_dir, 'ckpt')
     tl.files.exists_or_mkdir(checkpoint)
-    graph_dir = os.path.join(root_dir, 'model', 'graph')
+    graph_dir = os.path.join(model_dir, 'graph')
     tl.files.exists_or_mkdir(graph_dir)
     batch_size = 128
     lr_init = 1e-4
