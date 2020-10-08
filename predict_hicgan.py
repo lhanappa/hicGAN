@@ -59,6 +59,12 @@ def filename_parser(filename):
     bound = get_digit(info_str[2])
     return chunk, stride, bound
 
+def data_info(data):
+    indices = data['inds']
+    compacts = data['compacts'][()]
+    sizes = data['sizes'][()]
+    return indices, compacts, sizes
+
 def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
     # convert last element to str 'X'
