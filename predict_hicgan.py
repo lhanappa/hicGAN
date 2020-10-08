@@ -125,9 +125,10 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     inputs = np.array(hicgan_data['lr_data'], dtype=float)
     
     indices, compacts, sizes = data_info(hicgan_data)
-    hicgan_hics = hicgan_predictor(inputs, model_name)
-    
-    result_data = np.concatenate(hicgan_data, axis=0)
+    hicgan_hics = inputs #hicgan_predictor(inputs, model_name)
+    print(hicgan_hics.shape)
+    print(indices.shape)
+    result_data = np.concatenate(hicgan_hics, axis=0)
     result_inds = np.concatenate(indices, axis=0)
     hicgans = together(result_data, result_inds, tag='Reconstructing: ')
 
