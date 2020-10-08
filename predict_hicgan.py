@@ -94,7 +94,7 @@ def save_data(hic, compact, size, file):
     print('Saving file:', file)
 
 def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
-    os.environ["CUDA_VISIBLE_DEVICES"] = cuda
+    os.environ["CUDA_VISIBLE_DEVICES"] = str(cuda)
     # constuct lr_mats by your own if you want to using custom data.
     # lr_mats with shape (N,m,m,1)
     if not os.path.exists(save_dir):
