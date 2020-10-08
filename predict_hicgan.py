@@ -84,10 +84,10 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
         sub_mats = matlist[loci]
         index = indices[loci]
         print (index)
-        width = index[0,1]
+        width = index[0,1].astype(np.int)
         full_mat = np.zeros((width, width))
         for sub, pos in zip(sub_mats, index):
-            i, j = pos[-2], pos[-1]
+            i, j = pos[-2].astype(np.int), pos[-1].astype(np.int)
             if corp > 0:
                 sub = sub[:, corp:-corp, corp:-corp]
                 h, w = sub.shape
