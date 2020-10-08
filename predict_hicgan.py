@@ -80,6 +80,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     for n in chr_nums:
         # convert str 'X' to 23
         num = n #except_chr[species][n] if isinstance(n, str) else n
+        print(num)
         loci = np.where(indices[:,0] == num)[0]
         sub_mats = matlist[loci]
         index = indices[loci]
@@ -135,8 +136,7 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     indices, compacts, sizes = data_info(hicgan_data)
     hicgan_hics = inputs #hicgan_predictor(inputs, model_name)
     hicgan_hics = np.squeeze(hicgan_hics, axis=-1)
-    print(hicgan_hics.shape)
-    print(indices.shape)
+
     result_data = hicgan_hics # np.concatenate(hicgan_hics, axis=0)
     result_inds = indices # np.concatenate(indices, axis=0)
     hicgans = together(result_data, result_inds, tag='Reconstructing: ')
