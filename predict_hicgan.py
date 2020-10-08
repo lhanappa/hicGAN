@@ -69,7 +69,11 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
     print(chr_nums)
     # convert last element to str 'X'
-    if chr_nums[-1] in except_chr[species]: chr_nums[-1] = except_chr[species][chr_nums[-1]]
+    for i in np.arange(len(chr_nums)):
+        if chr_nums[i] in except_chr[species]: chr_nums[i] = except_chr[species][chr_nums[i]]
+        else:
+            chr_nums[i] = chr_nums.astype(np.int)
+
     print(f'{tag} data contain {chr_nums} chromosomes')
     h, w = matlist[0].shape
     results = dict.fromkeys(chr_nums)
@@ -130,7 +134,6 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     hicgan_hics = np.squeeze(hicgan_hics, axis=-1)
     print(hicgan_hics.shape)
     print(indices.shape)
-    print(indices[0:4,0])
     result_data = hicgan_hics # np.concatenate(hicgan_hics, axis=0)
     result_inds = indices # np.concatenate(indices, axis=0)
     hicgans = together(result_data, result_inds, tag='Reconstructing: ')
