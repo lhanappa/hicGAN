@@ -97,8 +97,8 @@ def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
     os.environ["CUDA_VISIBLE_DEVICES"] = str(cuda)
     # constuct lr_mats by your own if you want to using custom data.
     # lr_mats with shape (N,m,m,1)
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir, exist_ok=True)
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir, exist_ok=True)
     low_res = str(lr)
     files = [f for f in os.listdir(data_dir) if f.find(low_res) >= 0]
     hicgan_file = [f for f in files if f.find('.npz') >= 0][0]
