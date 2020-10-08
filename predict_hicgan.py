@@ -35,7 +35,7 @@ def hicGAN_g(t_image, is_train=False, reuse=False):
         n = Conv2d(n, 1, (1, 1), (1, 1), act=tf.nn.tanh, padding='SAME', W_init=w_init, name='out')
         return n
 
-def hicgan_predictor(lr_mats,model_name):
+def hicgan_predictor(lr_mats, model_name):
     t_image = tf.placeholder('float32', [None, None, None, 1], name='image_input')
     net_g = hicGAN_g(t_image, is_train=False, reuse=False)
     sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=False))
@@ -89,8 +89,8 @@ def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
     save_data(hics[key], compacts[key], sizes[key], file)
 
 def save_data(hic, compact, size, file):
-    deephic = spreadM(deep_hic, compact, size, convert_int=False, verbose=True)
-    np.savez_compressed(file, hic=deephic, compact=compact)
+    hic = spreadM(hic, compact, size, convert_int=False, verbose=True)
+    np.savez_compressed(file, hic=hic, compact=compact)
     print('Saving file:', file)
 
 def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
@@ -111,7 +111,7 @@ def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
     inputs = np.array(data['lr_data'], dtype=float)
     
     indices, compacts, sizes = data_info(hicgan_data)
-    hicgan_hics = hicgan_predictor(inputs, model_name, cuda)
+    hicgan_hics = hicgan_predictor(inputs, model_name)
     
     result_data = np.concatenate(hicgan_data, axis=0)
     result_inds = np.concatenate(indices, axis=0)
