@@ -117,7 +117,10 @@ def save_data(hic, compact, size, file):
 def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
     file = os.path.join(out_dir, f'predict_chr{key}_{low_res}.npz')
     print(key)
+    print(hics)
+    print(compacts)
     print(sizes)
+    print(file)
     save_data(hics[key], compacts[key], sizes[key], file)
 
 def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
