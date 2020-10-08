@@ -94,13 +94,13 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
         results[n] = full_mat
     return results
 
-def compactM(matrix, compact_idx, verbose=False):
-    """compacting matrix according to the index list."""
-    compact_size = len(compact_idx)
-    result = np.zeros((compact_size, compact_size)).astype(matrix.dtype)
-    if verbose: print('Compacting a', matrix.shape, 'shaped matrix to', result.shape, 'shaped!')
-    for i, idx in enumerate(compact_idx):
-        result[i, :] = matrix[idx][compact_idx]
+def spreadM(c_mat, compact_idx, full_size, convert_int=True, verbose=False):
+    """spreading matrix according to the index list (a reversed operation to compactM)."""
+    result = np.zeros((full_size, full_size)).astype(c_mat.dtype)
+    if convert_int: result = result.astype(np.int)
+    if verbose: print('Spreading a', c_mat.shape, 'shaped matrix to', result.shape, 'shaped!' )
+    for i, s_idx in enumerate(compact_idx):
+        result[s_idx, compact_idx] = c_mat[i]
     return result
 
 def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
