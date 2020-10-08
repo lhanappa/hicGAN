@@ -83,7 +83,6 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
         loci = np.where(indices[:,0] == num)[0]
         sub_mats = matlist[loci]
         index = indices[loci]
-        print (index)
         width = index[0,1].astype(np.int)
         full_mat = np.zeros((width, width))
         for sub, pos in zip(sub_mats, index):
@@ -142,6 +141,5 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     print(f'Start saving predicted data')
     print(f'Output path: {out_dir}')
     for key in compacts.keys():
-        save_data_n(key,deep_hics, compacts, sizes, low_res, out_dir)
-    
+        save_data_n(key, hicgans, compacts, sizes, low_res, out_dir)
     print(f'All data saved. Running cost is {(time.time()-start)/60:.1f} min.')
