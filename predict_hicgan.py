@@ -35,7 +35,7 @@ def hicGAN_g(t_image, is_train=False, reuse=False):
         n = Conv2d(n, 1, (1, 1), (1, 1), act=tf.nn.tanh, padding='SAME', W_init=w_init, name='out')
         return n
 
-def hicgan_predictor(lr_mats, model_name):
+def hicgan_predictor(lr_mats, model_name, batch=64):
     t_image = tf.placeholder('float32', [None, None, None, 1], name='image_input')
     net_g = hicGAN_g(t_image, is_train=False, reuse=False)
     sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=False))
@@ -107,7 +107,7 @@ def save_data(hic, compact, size, file):
     np.savez_compressed(file, hic=hic, compact=compact)
     print('Saving file:', file)
 
-def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
+def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     os.environ["CUDA_VISIBLE_DEVICES"] = str(cuda)
     # constuct lr_mats by your own if you want to using custom data.
     # lr_mats with shape (N,m,m,1)
