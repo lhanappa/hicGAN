@@ -83,6 +83,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
         loci = np.where(indices[:,0] == num)[0]
         sub_mats = matlist[loci]
         index = indices[loci]
+        print (index)
         width = index[0,1]
         full_mat = np.zeros((width, width))
         for sub, pos in zip(sub_mats, index):
