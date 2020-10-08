@@ -96,7 +96,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
             num = num
         else: 
             num = num.astype(np.int)
-        results[n] = full_mat
+        results[num] = full_mat
     return results
 
 def spreadM(c_mat, compact_idx, full_size, convert_int=True, verbose=False):
@@ -117,7 +117,7 @@ def save_data(hic, compact, size, file):
 def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
     file = os.path.join(out_dir, f'predict_chr{key}_{low_res}.npz')
     print(key)
-    print(hics)
+    print(hics.keys())
     print(compacts)
     print(sizes)
     print(file)
