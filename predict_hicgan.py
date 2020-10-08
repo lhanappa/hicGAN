@@ -103,16 +103,16 @@ def spreadM(c_mat, compact_idx, full_size, convert_int=True, verbose=False):
         result[s_idx, compact_idx] = c_mat[i]
     return result
 
-def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
-    file = os.path.join(out_dir, f'predict_chr{key}_{low_res}.npz')
-    save_data(hics[key], compacts[key], sizes[key], file)
-
 def save_data(hic, compact, size, file):
     print(file)
     hic = spreadM(hic, compact, size, convert_int=False, verbose=True)
     np.savez_compressed(file, hic=hic, compact=compact)
     print('Saving file:', file)
 
+def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
+    file = os.path.join(out_dir, f'predict_chr{key}_{low_res}.npz')
+    save_data(hics[key], compacts[key], sizes[key], file)
+    
 def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     os.environ["CUDA_VISIBLE_DEVICES"] = str(cuda)
     # constuct lr_mats by your own if you want to using custom data.
