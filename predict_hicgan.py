@@ -70,7 +70,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     print(chr_nums)
     # convert last element to str 'X'
     for i in np.arange(len(chr_nums)):
-        if chr_nums[i] in except_chr[species]: chr_nums[i] = except_chr[species][chr_nums[i]]
+        if chr_nums[i] in except_chr[species]: pass
         else:
             chr_nums[i] = chr_nums[i].astype(np.int)
 
