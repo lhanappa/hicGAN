@@ -67,7 +67,6 @@ def data_info(data):
 
 def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
-    print(chr_nums)
     # convert last element to str 'X'
     """for i in np.arange(len(chr_nums)):
         if chr_nums[i] in except_chr[species]: pass
@@ -80,7 +79,6 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     for n in chr_nums:
         # convert str 'X' to 23
         num = n #except_chr[species][n] if isinstance(n, str) else n
-        print(num)
         loci = np.where(indices[:,0] == num)[0]
         sub_mats = matlist[loci]
         index = indices[loci]
