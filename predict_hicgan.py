@@ -115,7 +115,7 @@ def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
 
     start = time.time()
     print(f'Loading data[HiCGAN]: {hicgan_file}')
-    hicgan_data = np.load(os.path.join(in_dir, hicgan_file), allow_pickle=True)
+    hicgan_data = np.load(os.path.join(data_dir, hicgan_file), allow_pickle=True)
     inputs = np.array(data['lr_data'], dtype=float)
     
     indices, compacts, sizes = data_info(hicgan_data)
