@@ -72,7 +72,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     for i in np.arange(len(chr_nums)):
         if chr_nums[i] in except_chr[species]: chr_nums[i] = except_chr[species][chr_nums[i]]
         else:
-            chr_nums[i] = chr_nums.astype(np.int)
+            chr_nums[i] = chr_nums[i].astype(np.int)
 
     print(f'{tag} data contain {chr_nums} chromosomes')
     h, w = matlist[0].shape
