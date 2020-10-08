@@ -69,17 +69,17 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
     print(chr_nums)
     # convert last element to str 'X'
-    for i in np.arange(len(chr_nums)):
+    """for i in np.arange(len(chr_nums)):
         if chr_nums[i] in except_chr[species]: pass
         else:
-            chr_nums[i] = chr_nums[i].astype(np.int)
+            chr_nums[i] = chr_nums[i].astype(np.int)"""
 
     print(f'{tag} data contain {chr_nums} chromosomes')
     h, w = matlist[0].shape
     results = dict.fromkeys(chr_nums)
     for n in chr_nums:
         # convert str 'X' to 23
-        num = except_chr[species][n] if isinstance(n, str) else n
+        num = n #except_chr[species][n] if isinstance(n, str) else n
         loci = np.where(indices[:,0] == num)[0]
         sub_mats = matlist[loci]
         index = indices[loci]
