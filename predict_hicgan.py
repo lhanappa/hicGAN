@@ -126,6 +126,7 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     
     indices, compacts, sizes = data_info(hicgan_data)
     hicgan_hics = inputs #hicgan_predictor(inputs, model_name)
+    hicgan_hics = np.squeeze(hicgan_hics, axis=-1)
     print(hicgan_hics.shape)
     print(indices.shape)
     result_data = np.concatenate(hicgan_hics, axis=0)
