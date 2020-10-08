@@ -51,6 +51,15 @@ def hicgan_predictor(lr_mats, model_name):
         out[batch*(i+1):] = sess.run(net_g.outputs, {t_image: lr_mats[batch*(i+1):]})
         return out
 
+get_digit = lambda x: int(''.join(list(filter(str.isdigit, x))))
+def filename_parser(filename):
+    info_str = filename.split('.')[0].split('_')[2:-1]
+    chunk = get_digit(info_str[0])
+    stride = get_digit(info_str[1])
+    bound = get_digit(info_str[2])
+    scale = 1 if info_str[3] == 'nonpool' else get_digit(info_str[3])
+    return chunk, stride, bound, scale
+    
 def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
     # convert last element to str 'X'
