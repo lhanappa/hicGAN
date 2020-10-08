@@ -67,6 +67,7 @@ def data_info(data):
 
 def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
+    print(chr_nums)
     # convert last element to str 'X'
     if chr_nums[-1] in except_chr[species]: chr_nums[-1] = except_chr[species][chr_nums[-1]]
     print(f'{tag} data contain {chr_nums} chromosomes')
