@@ -57,9 +57,8 @@ def filename_parser(filename):
     chunk = get_digit(info_str[0])
     stride = get_digit(info_str[1])
     bound = get_digit(info_str[2])
-    scale = 1 if info_str[3] == 'nonpool' else get_digit(info_str[3])
-    return chunk, stride, bound, scale
-    
+    return chunk, stride, bound
+
 def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     chr_nums = sorted(list(np.unique(indices[:,0])))
     # convert last element to str 'X'
@@ -111,7 +110,7 @@ def predict(data_dir, model_name, out_dir, lr=40000, batch=64, cuda=0):
     low_res = str(lr)
     files = [f for f in os.listdir(data_dir) if f.find(low_res) >= 0]
     hicgan_file = [f for f in files if f.find('.npz') >= 0][0]
-    chunk, stride, bound, scale = filename_parser(hicgan_file)
+    chunk, stride, bound = filename_parser(hicgan_file)
     #sr_mats_pre = predictor(lr_mats,model_name)
 
     start = time.time()
