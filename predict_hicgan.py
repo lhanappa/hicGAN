@@ -129,6 +129,7 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     hicgan_hics = np.squeeze(hicgan_hics, axis=-1)
     print(hicgan_hics.shape)
     print(indices.shape)
+    print(indices[0:4,0])
     result_data = np.concatenate(hicgan_hics, axis=0)
     result_inds = np.concatenate(indices, axis=0)
     hicgans = together(result_data, result_inds, tag='Reconstructing: ')
