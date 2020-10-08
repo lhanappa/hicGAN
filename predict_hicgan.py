@@ -92,6 +92,10 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
                 sub = sub[:, corp:-corp, corp:-corp]
                 h, w = sub.shape
             full_mat[i:i+h, j:j+w] = sub
+        if num in except_chr[species]:
+            num = num
+        else: 
+            num = num.astype(np.int)
         results[n] = full_mat
     return results
 
