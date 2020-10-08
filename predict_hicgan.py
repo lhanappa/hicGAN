@@ -70,7 +70,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
     # convert last element to str 'X'
     if chr_nums[-1] in except_chr[species]: chr_nums[-1] = except_chr[species][chr_nums[-1]]
     print(f'{tag} data contain {chr_nums} chromosomes')
-    _, h, w = matlist[0].shape
+    h, w = matlist[0].shape
     results = dict.fromkeys(chr_nums)
     for n in chr_nums:
         # convert str 'X' to 23
@@ -84,7 +84,7 @@ def together(matlist, indices, corp=0, species='hsa', tag='HiC'):
             i, j = pos[-2], pos[-1]
             if corp > 0:
                 sub = sub[:, corp:-corp, corp:-corp]
-                _, h, w = sub.shape
+                h, w = sub.shape
             full_mat[i:i+h, j:j+w] = sub
         results[n] = full_mat
     return results
