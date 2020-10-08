@@ -108,6 +108,7 @@ def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
     save_data(hics[key], compacts[key], sizes[key], file)
 
 def save_data(hic, compact, size, file):
+    print(file)
     hic = spreadM(hic, compact, size, convert_int=False, verbose=True)
     np.savez_compressed(file, hic=hic, compact=compact)
     print('Saving file:', file)
