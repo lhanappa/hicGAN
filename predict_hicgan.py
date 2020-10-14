@@ -112,11 +112,11 @@ def save_data(hic, compact, size, file):
     np.savez_compressed(file, hic=hic, compact=compact)
     print('Saving file:', file)
 
-def save_data_n(key, hics, compacts, sizes, low_res, out_dir):
-    file = os.path.join(out_dir, f'predict_chr{key}_{low_res}.npz')
+def save_data_n(key, hics, compacts, sizes, high_res, out_dir):
+    file = os.path.join(out_dir, f'predict_chr{key}_{high_res}.npz')
     save_data(hics[key], compacts[key], sizes[key], file)
 
-def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
+def predict(data_dir, model_name, out_dir, lr=40000, hr=10000, cuda=0):
     os.environ["CUDA_VISIBLE_DEVICES"] = str(cuda)
     # constuct lr_mats by your own if you want to using custom data.
     # lr_mats with shape (N,m,m,1)
@@ -144,5 +144,5 @@ def predict(data_dir, model_name, out_dir, lr=40000, cuda=0):
     print(f'Start saving predicted data')
     print(f'Output path: {out_dir}')
     for key in compacts.keys():
-        save_data_n(key, hicgans, compacts, sizes, low_res, out_dir)
+        save_data_n(key, hicgans, compacts, sizes, high_res=hr, out_dir=out_dir)
     print(f'All data saved. Running cost is {(time.time()-start)/60:.1f} min.')
