@@ -11,14 +11,14 @@ import numpy as np
 from time import localtime, strftime
 import logging
 import scipy
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorlayer as tl
 from tensorlayer.layers import *
 import matplotlib.pyplot as plt
 import hickle as hkl
 from skimage.measure import compare_mse
 from skimage.measure import compare_ssim
-
+tf.disable_v2_behavior()
 
 def calculate_psnr(mat1, mat2):
     data_range = np.max(mat1)-np.min(mat1)
